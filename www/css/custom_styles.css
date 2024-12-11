@@ -1,0 +1,216 @@
+/* custom_styles.css */
+/* Apply the Mulish font to the entire body of the app */
+body {
+    font-family: 'Mulish', sans-serif; /* Use the Mulish font for all text */
+    background-color: #f4f4f4; /* Optional: set a background color */
+}
+
+/* Style for the plan selector container to center the input and add margin */
+.plan-selector-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: #ffffff;
+}
+
+/* Style for the plan selector input to increase its width and ensure it fits within its container */
+.plan-selector {
+    width: 500px;  /* Set a fixed width in pixels for the select input */
+    max-width: 500px; /* Ensure it doesn't exceed the width of its parent container */
+    text-align: center; /* Center the label text */
+}
+
+/* General style for buttons used in the control bar */
+.btn-primary {
+    background-color: #007bff; /* Set button background color to primary blue */
+    color: white; /* Set button text color to white */
+    font-size: 16px; /* Set font size to 16px */
+}
+
+/* Style for the cards in the app body */
+.card-custom {
+    background-color: #ffffff; /* Set the background color for the card */
+    padding: 20px; /* Add padding inside the card */
+    border-radius: 10px; /* Round the corners of the card */
+    color: black; /* Set the text color to white */
+    margin-bottom: 20px; /* Add space below the card */
+}
+
+/* Ensure that selectInput elements inside .card-custom have appropriate styles */
+.card-custom select {
+    background-color: white; /* Set the background of the select input to white */
+    color: #0137A6; /* Set the text color to black */
+    border: 1px solid #ccc; /* Add a border */
+    border-radius: 4px; /* Slightly rounded corners */
+    font-size: 14px; /* Set font size */
+    padding: 5px; /* Add some padding for better appearance */
+    width: 100%; /* Make the select input take full width of its container */
+}
+
+/* Optional: Adjust label color inside .card-custom if needed */
+.card-custom label {
+    color: #0137A6; /* Keep labels white to contrast with the blue background */
+}
+
+/* Style for the error messages in Shiny */
+.shiny-output-error {
+    color: #ff0000; /* Set error message color to red */
+}
+
+/* Prefix the error message with "Error: " */
+.shiny-output-error:before {
+    content: 'Error: ';
+}
+
+/* Style for the well panel */
+.well {
+    background-color: #ffffff; /* Set the background color of the well panel */
+    border-radius: 8px; /* Round the corners of the well panel */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Add a subtle shadow for depth */
+}
+
+.control-bar {
+    position: absolute;
+    right: 0; 
+    top: 50%; 
+    transform: translateY(-50%);
+  }
+  
+.control-button {
+    font-size: 14px;
+    margin-right: 10px; 
+    background-color: #007bff;
+    color: white; ;
+  }
+
+  /* custom_styles.css */
+  .sidebar-logo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: auto;
+    text-align: centre;
+    padding: 10px 0; /* Add padding to give some space around the logo */
+    background-color: #fff; /* Light background color to distinguish the logo area */
+    z-index: 1050;
+}
+  
+  .sidebar-logo img {
+    height: 70px; /* Adjust the height of the logo as needed */
+    max-width: 100%; /* Ensure the logo scales within the container */
+    background-color: #ffffff; /* Optional: Add a background behind the logo */
+    border-radius: 8px; /* Optional: Add rounded corners for a modern look */
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for a more professional look */
+    padding: 10px; /* Optional: Add a slight shadow around the logo */
+  }
+
+
+  /* Set the background color of the sidebar */
+.main-sidebar {
+    background-color: #fff !important;  /* Apply the desired color */
+    box-shadow: none !important;
+    padding-top: 80px;
+  }
+  
+/* Style container to remove list style and position correctly */
+.header-title-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Align items to the start of the container */
+    margin-left: 0; /* Match the sidebar width */
+    position: relative; /* Ensure the container is positioned correctly */
+    width: 305px; /* Match the width of the sidebar-footer */
+    text-align: left; /* Center the title text */
+    padding: 5px 0; /* Add padding to give some space around the title */
+    background-color: #fff; /* Light background color to distinguish the title area */
+    border-radius: 8px; /* Optional: Add rounded corners for a modern look */
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for a more professional look */
+
+}
+
+/* Style for the header title */
+.header-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #0137A6;
+    padding-left: 5px; /* Space after the vertical line */
+}
+
+/* Footer styling */
+.body-footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #f4f2ee;
+    color: #0137A6;
+    text-align: center;
+    padding: 10px;
+    z-index: 1030;
+}
+
+
+/* Sidebar Items ----------------------------------------------------------------------------------*/
+.menu-container {
+    display: block; /* Align items to the start of the container */
+    position: fixed; /* Ensure the container is positioned correctly */    
+    top: 100px;  /* Aligns to the top of the viewport */
+    left: 0; 
+    width: 250px; /* Match the width of the sidebar-footer */
+    padding: 10px 5px; /* Add padding to give some space around the title */
+    background-color: #fff; /* Light background color to distinguish the title area */
+    border-radius: 8px; /* Optional: Add rounded corners for a modern look */
+    font-family: 'Mulish', sans-serif;
+    z-index: 1050;
+}
+
+
+
+
+/* ------------------------------------------------------------------------------------------- */
+
+/* Style for upload container */
+.upload-container {
+    background-color: #FFFFFF;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #d1d1d1; 
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 16px;
+    color: #000000;
+  }
+  
+  /* Style for upload file input label */
+  .upload-label {
+    color: #0137A6;
+  }
+  
+  /* Style for instruction header */
+  .instruction-header {
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 10px;
+    color: #0137A6;
+  }
+  
+  /* Style for list item font sizes */
+  .list-item {
+    font-size: 14px;
+  }
+  
+  .sub-list-item {
+    font-size: 12px;
+  }
+  
+/* -------------Button styling------------------------------------------------------------------------------ */
+.btn-primary-custom {
+    background-color: #007bff;
+    color: white;
+    font-size: 12px;
+  }
+  
+  .custom-list-item {
+    color: #0137A6;
+}
+
