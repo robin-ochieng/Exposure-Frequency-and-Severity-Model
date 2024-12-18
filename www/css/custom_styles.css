@@ -179,19 +179,42 @@ body {
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
     margin-bottom: 16px;
     color: #000000;
+    height: 43vh;
   }
+
+      /* Style for the list items */
+  .upload-container .custom-list-item {
+    margin-bottom: 10px;       /* Add consistent spacing between list items */
+    display: flex;            /* Align icon and text horizontally */
+    align-items: center;      /* Vertically align icon with text */
+  }
+
+  /* Style for sub-list items */
+  .upload-container .sub-list-item .custom-list-item {
+    margin-bottom: 5px;       /* Slightly reduce spacing for sub-list items */
+  }
+
+
+  /* Adjust icon spacing */
+  .upload-container .custom-list-item i {
+    margin-right: 6px;       /* Add space to the right of the icons */
+  }
+  
   
   /* Style for upload file input label */
   .upload-label {
     color: #0137A6;
+    font-size: 14px;
+    margin-bottom: 30px;
   }
   
   /* Style for instruction header */
   .instruction-header {
     font-weight: bold;
-    font-size: 16px;
+    font-size: 14px;
     margin-top: 10px;
     color: #0137A6;
+    margin-bottom: 10px; 
   }
   
   /* Style for list item font sizes */
@@ -213,4 +236,122 @@ body {
   .custom-list-item {
     color: #0137A6;
 }
+
+/* Target the menu item text in the sidebar */
+.nav-sidebar .nav-item > .nav-link > p {
+  font-size: 14px !important;
+}
+
+
+
+
+
+
+
+
+/*  Responsiveness Custom Styles for Small Screens -----------------------------------------------------------------------------------------------------------------*/
+@media (max-width: 768px) {  /* Adjusts for tablets and smaller desktops */
+
+  /* Style for upload file input label */
+  .upload-label {
+    color: #0137A6;
+    font-size: 10px;
+  }
+
+    /* Style for instruction header */
+  .instruction-header {
+    font-size: 10px; 
+  }
+
+  /* Style for list item font sizes */
+  .list-item {
+    font-size: 8px;
+  }
+  
+  .sub-list-item {
+    font-size: 8px;
+  }
+
+  .menu-container {
+    width: 45%; /* Full width to utilize the available space */
+    padding: 10px; /* Reduced padding */
+    top: 60px; /* Adjusts the position to avoid overlap with any top bar */
+    left: 360px; /* Aligns to the left edge */
+    border-radius: 0; /* Optional: Removes border radius for a full-width fit */
+}
+
+  .upload-container {
+      width: 100%; /* Full width to utilize the available space */
+      padding: 10px; /* Reduced padding */
+      top: 60px; /* Adjusts the position to avoid overlap with any top bar */
+      left: 0; /* Aligns to the left edge */
+      border-radius: 0; /* Optional: Removes border radius for a full-width fit */
+  }
+
+.sidebar-logo img {
+    height: 40px; /* Slightly reduce the logo size for medium devices */
+}
+.sidebar-logo {
+    padding: 5px 0; /* Reduce padding to save space */
+    position: static; /* Optional: Adjust position if needed for layout */
+    width: 100%; /* Full width to accommodate smaller screen */
+}
+
+/* Target the menu item text in the sidebar */
+.nav-sidebar .nav-item > .nav-link > p {
+  font-size: 10px !important;
+}
+
+}
+
+@media (max-width: 480px) { /* Adjusts for mobile devices */
+  /* Style for upload file input label */
+  .upload-label {
+    color: #0137A6;
+    font-size: 8px;
+  }
+   /* Style for instruction header */
+  .instruction-header {
+    font-size: 8px; 
+    }
+  /* Style for list item font sizes */
+  .list-item {
+    font-size: 6px;
+  }
+  
+  .sub-list-item {
+    font-size: 6px;
+  }
+
+  .menu-container {
+    position: static; /* Makes the menu static to flow with document */
+    width: 45%; /* Full width for better accessibility */
+    padding: 8px; /* Slightly less padding */
+    top: 60px; /* Adjusts the position to avoid overlap with any top bar */
+    left: 360px; /* Aligns to the left edge */
+    border-radius: 0; /* Removes border radius for a cleaner edge fit */
+}
+
+.upload-container {
+    position: static; /* Makes the menu static to flow with document */
+    width: 100%; /* Full width for better accessibility */
+    padding: 8px; /* Slightly less padding */
+    border-radius: 0; /* Removes border radius for a cleaner edge fit */
+}
+.sidebar-logo img {
+    height: 40px; /* Further reduce the logo size for small devices */
+}
+.sidebar-logo {
+    padding: 5px 0; /* Minimize padding to maximize space */
+    position: static; /* Make it static to flow with the document structure */
+    width: 100%; /* Ensure it spans the full width */
+}
+
+/* Target the menu item text in the sidebar */
+.nav-sidebar .nav-item > .nav-link > p {
+  font-size: 8px !important;
+}
+
+}
+
 
