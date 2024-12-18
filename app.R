@@ -44,6 +44,7 @@ my_theme <- bs_theme(
 
 # Define the User Interface for the Application
 ui <- bs4DashPage(
+  title = "Exposure Frequency and Severity Model",
   dark = NULL,
   help = NULL,
   fullscreen = FALSE,
@@ -83,7 +84,8 @@ ui <- bs4DashPage(
   body = dashboardBody(
     tags$head(
         includeCSS("www/css/custom_styles.css"),
-        tags$link(href = "https://fonts.googleapis.com/css?family=Mulish", rel = "stylesheet")
+        tags$link(href = "https://fonts.googleapis.com/css?family=Mulish", rel = "stylesheet"),
+        tags$link(rel = "shortcut icon", href = "favicon/kenbright.ico", type = "image/x-icon")
     ),
     bs4TabItems(
       bs4TabItem(
