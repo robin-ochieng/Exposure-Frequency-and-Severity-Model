@@ -8,7 +8,9 @@ claimsDataInputUI <- function(id) {
       br(),
       br(),
       class = "upload-container",
-      fileInput(ns("file2"), label = tags$span("Upload Claims Data as an Excel or CSV File", class = "upload-label"), accept = c(".xlsx", ".xls", ".csv"))
+      fileInput(ns("file2"),
+      label = tags$span("Upload Claims Data as an Excel or CSV File", class = "upload-label"), 
+      accept = c(".xlsx", ".xls", ".csv"))
       )
      ),
       hr(),
@@ -58,9 +60,10 @@ processedClaimsData <- eventReactive(input$file2, {
       # Process Excel file
       data <- read_excel(inFile$datapath) %>%
         mutate(
-          Loss_Date = as.Date(Loss_Date, format = "%m/%d/%Y"),
+          Loss_Date = lubridate::parse_date_time(Loss_Date, orders = c("dmy", "ymd", "mdy")),
           Claim_ID = paste(ClaimNo, Loss_Date),
-          Loss_year = year(Loss_Date)
+          Loss_year = year(Loss_Date),
+          Gross_Reported = as.numeric(Gross_Reported)
         ) %>%
         group_by(Claim_ID) %>%
         mutate(Unique = ifelse(row_number() == 1, 1, 0)) %>%
@@ -69,9 +72,10 @@ processedClaimsData <- eventReactive(input$file2, {
       # Process CSV file
       data <- read_csv(inFile$datapath) %>%
         mutate(
-          Loss_Date = as.Date(Loss_Date, format = "%m/%d/%Y"),
+          Loss_Date = lubridate::parse_date_time(Loss_Date, orders = c("dmy", "ymd", "mdy")),
           Claim_ID = paste(ClaimNo, Loss_Date),
-          Loss_year = year(Loss_Date)
+          Loss_year = year(Loss_Date),
+          Gross_Reported = as.numeric(Gross_Reported)
         ) %>%
         group_by(Claim_ID) %>%
         mutate(Unique = ifelse(row_number() == 1, 1, 0)) %>%
