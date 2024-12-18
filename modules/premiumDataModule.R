@@ -27,14 +27,13 @@ premiumDataInputUI <- function(id) {
       tags$li(class = "custom-list-item", icon("file-alt"), " ", tags$b("PolicyNo: -"), " The Policy Number"),
       tags$li(class = "custom-list-item", icon("sitemap"), " ", tags$b("Statutory_Class: -"), " The Statutory Class of Business"),
       tags$li(class = "custom-list-item", icon("dollar-sign"), " ", tags$b("Gross_Premium: -"), " The Gross Premium Amount")
-
      )
     )
    ),
    hr(),
    bs4Card(
       title = "Premium Data Overview",
-      status = "white",
+      status = "white", 
       solidHeader = TRUE,
       width = 12,
       DTOutput(ns("viewPremiumData"))
@@ -61,8 +60,8 @@ processedPremiumData <- eventReactive(input$file1, {
       # Process Excel file
       data <- read_excel(inFile$datapath) %>%
         mutate(
-          `Period_From` = as.Date(`Period_From`, format = "%m/%d/%Y"),
-          `Period_Upto` = as.Date(`Period_Upto`, format = "%m/%d/%Y"),
+          `Period_From` = lubridate::parse_date_time(`Period_From`, orders = c("dmy", "ymd", "mdy")),
+          `Period_Upto` = lubridate::parse_date_time(`Period_Upto`, orders = c("dmy", "ymd", "mdy")),
           Policy_ID = paste(PolicyNo, Period_From, Period_Upto)
         ) %>%
         group_by(Policy_ID) %>%
@@ -72,8 +71,8 @@ processedPremiumData <- eventReactive(input$file1, {
       # Process CSV file
       data <- read_csv(inFile$datapath) %>%
         mutate(
-          `Period_From` = as.Date(`Period_From`, format = "%m/%d/%Y"),
-          `Period_Upto` = as.Date(`Period_Upto`, format = "%m/%d/%Y"),
+          `Period_From` = lubridate::parse_date_time(`Period_From`, orders = c("dmy", "ymd", "mdy")),
+          `Period_Upto` = lubridate::parse_date_time(`Period_Upto`, orders = c("dmy", "ymd", "mdy")),
           Policy_ID = paste(PolicyNo, Period_From, Period_Upto)
         ) %>%
         group_by(Policy_ID) %>%
