@@ -138,44 +138,30 @@ server <- function(input, output, session) {
   
   processedData <- callModule(premiumDataInput, "premiumDataModule") 
 
-
   processedClaimsData  <- callModule(claimsDataInput, "claimsDataModule")
-
 
   Exposure_Results <- exposureResultsServer("exposureResults", processedData)
 
-
   Gross_Reported_Claims <- grossReportedClaimsServer("grossReportedClaims", processedClaimsData)
-
 
   Unique_Results <- uniqueClaimsResultsServer("uniqueClaimsModule", processedClaimsData)
 
-
   Frequency_Results <- claimsFrequencyServer("claimsFrequency", Unique_Results, Exposure_Results$Exposure_Results)
- 
 
   claimsFrequencyVarianceServer("claimsFrequencyVariance", Frequency_Results)
-  
 
   Severity_Results <- severityServer("severity", Unique_Results, Gross_Reported_Claims)
 
-
   severityVarianceServer("severityVariance", Severity_Results)
 
-
   Risk_Premium <- riskPremiumServer("riskPremium", Unique_Results, Frequency_Results, Severity_Results)
-
 
   officePremiumServer("officePremium", Risk_Premium, 
                       yearStart = Exposure_Results$yearStart, 
                       yearEnd = Exposure_Results$yearEnd)
   
- 
-
   frequencyvsSeverityServer("frequencyvsSeverity", Frequency_Results, Severity_Results)
-  
-
-  
+    
 }
 
 # Run the application
