@@ -1,0 +1,13 @@
+# R package requirements for Posit Connect Cloud
+# This file helps Posit Connect install the necessary packages
+
+shiny
+tidyverse
+readxl
+scales
+plotly
+ggrepel
+bs4Dash
+bslib
+DT
+lubridate

@@ -1,0 +1,11 @@
+.git
+.gitignore
+.Rhistory
+.RData
+.Rproj.user
+*.Rproj
+README.md
+deploy.R
+DEPLOYMENT.md
+.DS_Store
+Thumbs.db
