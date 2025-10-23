@@ -14,9 +14,20 @@ exposureResultsUI <- function(id) {
         br(),
         br(),
         fluidRow(hr(),
-                 numericInput(ns("yearStart"), "Select Exposure Start Year", value = 2017, min = 2000, max = 2100),
-                 hr(),
-                 numericInput(ns("yearEnd"), "Select Exposure End Year", value = 2023, min = 2000, max = 2100), hr()),
+                 column(6,
+                   numericInput(ns("yearStart"), "Select Exposure Start Year", value = 2017, min = 2000, max = 2100)
+                 ),
+                 hr()),
+        fluidRow(hr(),
+                 column(6,
+                   numericInput(ns("yearEnd"), "Select Exposure End Year", value = 2023, min = 2000, max = 2100)
+                 ),
+                 column(6,
+                   selectInput(ns("quarterEnd"), "Select Exposure End Quarter", 
+                             choices = c("Q1" = 1, "Q2" = 2, "Q3" = 3, "Q4" = 4),
+                             selected = 4)
+                 ),
+                 hr()),
         br(),
         fluidRow(
             hr(),
@@ -42,8 +53,30 @@ exposureResultsServer <- function(id, processedPremiumData) {
       setProgress(0.1)  # Start with an initial small progress
       beg_dates <- lapply(years, function(x) mdy(paste("01/01/", x, sep = "")))
       names(beg_dates) <- paste("Beg_", years, sep = "")
-      end_dates <- lapply(years, function(x) mdy(paste("12/31/", x, sep = "")))
+      
+      # Adjust end dates based on selected quarter for the final year
+      end_dates <- lapply(seq_along(years), function(i) {
+        year <- years[i]
+        # For the last year, use the selected quarter
+        if (year == input$yearEnd) {
+          quarter <- as.numeric(input$quarterEnd)
+          end_month <- quarter * 3  # Q1=3, Q2=6, Q3=9, Q4=12
+          # Get the last day of the quarter
+          if (end_month %in% c(1, 3, 5, 7, 8, 10, 12)) {
+            end_day <- 31
+          } else if (end_month == 2) {
+            # Check for leap year
+            end_day <- ifelse(((year %% 4 == 0) & (year %% 100 != 0)) | (year %% 400 == 0), 29, 28)
+          } else {
+            end_day <- 30
+          }
+          mdy(paste(end_month, "/", end_day, "/", year, sep = ""))
+        } else {
+          mdy(paste("12/31/", year, sep = ""))
+        }
+      })
       names(end_dates) <- paste("End_", years, sep = "")
+      
       data <- processedPremiumData()
       for (i in seq_along(years)) {
         year <- years[i]
@@ -110,7 +143,8 @@ exposureResultsServer <- function(id, processedPremiumData) {
     return(list(
       Exposure_Results = reactive({ Exposure_Results() }),
       yearStart = reactive({ input$yearStart }),
-      yearEnd = reactive({ input$yearEnd })
+      yearEnd = reactive({ input$yearEnd }),
+      quarterEnd = reactive({ input$quarterEnd })
     ))
 
   })

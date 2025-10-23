@@ -354,4 +354,46 @@ body {
 
 }
 
+/* Custom styles for Exposure Results form fields */
+.exposure-form-row {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.exposure-form-row .form-group {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+/* Ensure consistent label and input styling */
+.exposure-form-row label {
+  color: #0137A6;
+  font-weight: 500;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.exposure-form-row input[type="number"],
+.exposure-form-row select {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+/* Responsive adjustments for exposure form */
+@media (max-width: 768px) {
+  .exposure-form-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .exposure-form-row .form-group {
+    width: 100%;
+  }
+}
+
 
