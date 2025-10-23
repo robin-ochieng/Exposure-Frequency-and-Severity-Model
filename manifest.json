@@ -1,0 +1,146 @@
+{
+  "version": 1,
+  "locale": "en_US.UTF-8",
+  "metadata": {
+    "appmode": "shiny",
+    "entrypoint": "app.R"
+  },
+  "files": {
+    "app.R": {
+      "checksum": ""
+    },
+    "modules/claimsDataModule.R": {
+      "checksum": ""
+    },
+    "modules/premiumDataModule.R": {
+      "checksum": ""
+    },
+    "modules/exposureResultsModule.R": {
+      "checksum": ""
+    },
+    "modules/grossReportedClaimsModule.R": {
+      "checksum": ""
+    },
+    "modules/uniqueClaimsModule.R": {
+      "checksum": ""
+    },
+    "modules/claimFrequencyModule.R": {
+      "checksum": ""
+    },
+    "modules/claimFrequencyVarianceModule.R": {
+      "checksum": ""
+    },
+    "modules/severityModule.R": {
+      "checksum": ""
+    },
+    "modules/severityVarianceModule.R": {
+      "checksum": ""
+    },
+    "modules/riskPremiumModule.R": {
+      "checksum": ""
+    },
+    "modules/officePremiumModule.R": {
+      "checksum": ""
+    },
+    "modules/frequencyvsSeverityModule.R": {
+      "checksum": ""
+    },
+    "www/css/custom_styles.css": {
+      "checksum": ""
+    }
+  },
+  "packages": {
+    "R": {
+      "version": "4.3.0",
+      "repositories": [
+        {
+          "Name": "CRAN",
+          "URL": "https://cran.rstudio.com/"
+        }
+      ]
+    },
+    "shiny": {
+      "Source": "CRAN",
+      "Repository": "https://cran.rstudio.com/",
+      "description": {
+        "Package": "shiny",
+        "Version": "1.8.0"
+      }
+    },
+    "tidyverse": {
+      "Source": "CRAN",
+      "Repository": "https://cran.rstudio.com/",
+      "description": {
+        "Package": "tidyverse",
+        "Version": "2.0.0"
+      }
+    },
+    "readxl": {
+      "Source": "CRAN",
+      "Repository": "https://cran.rstudio.com/",
+      "description": {
+        "Package": "readxl",
+        "Version": "1.4.3"
+      }
+    },
+    "scales": {
+      "Source": "CRAN",
+      "Repository": "https://cran.rstudio.com/",
+      "description": {
+        "Package": "scales",
+        "Version": "1.3.0"
+      }
+    },
+    "plotly": {
+      "Source": "CRAN",
+      "Repository": "https://cran.rstudio.com/",
+      "description": {
+        "Package": "plotly",
+        "Version": "4.10.4"
+      }
+    },
+    "ggrepel": {
+      "Source": "CRAN",
+      "Repository": "https://cran.rstudio.com/",
+      "description": {
+        "Package": "ggrepel",
+        "Version": "0.9.5"
+      }
+    },
+    "bs4Dash": {
+      "Source": "CRAN",
+      "Repository": "https://cran.rstudio.com/",
+      "description": {
+        "Package": "bs4Dash",
+        "Version": "2.3.3"
+      }
+    },
+    "bslib": {
+      "Source": "CRAN",
+      "Repository": "https://cran.rstudio.com/",
+      "description": {
+        "Package": "bslib",
+        "Version": "0.6.1"
+      }
+    },
+    "DT": {
+      "Source": "CRAN",
+      "Repository": "https://cran.rstudio.com/",
+      "description": {
+        "Package": "DT",
+        "Version": "0.31"
+      }
+    },
+    "lubridate": {
+      "Source": "CRAN",
+      "Repository": "https://cran.rstudio.com/",
+      "description": {
+        "Package": "lubridate",
+        "Version": "1.9.3"
+      }
+    }
+  },
+  "python": null,
+  "quarto": null,
+  "renv": null
+}
