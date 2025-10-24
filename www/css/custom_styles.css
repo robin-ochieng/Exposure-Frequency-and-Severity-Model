@@ -1,8 +1,40 @@
 /* custom_styles.css */
-/* Apply the Mulish font to the entire body of the app */
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&display=swap');
+
+/* Apply Nunito Sans and Kenbright gradient canvas */
 body {
-    font-family: 'Mulish', sans-serif; /* Use the Mulish font for all text */
-    background-color: #f4f4f4; /* Optional: set a background color */
+  font-family: 'Nunito Sans', sans-serif;
+  color: #103b63;
+  background: linear-gradient(135deg, rgba(0,100,230,0.18), rgba(0,163,196,0.12), rgba(232,243,255,0.45));
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url('../images/kenbright-bg.svg') center/cover no-repeat;
+  opacity: 0.85;
+  z-index: -2;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(145deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.4) 40%, rgba(255,255,255,0.15) 100%);
+  z-index: -1;
+}
+
+.content-wrapper,
+.content-wrapper .content,
+.right-side,
+.main-footer,
+.content,
+.control-sidebar {
+  background: transparent;
 }
 
 /* Style for the plan selector container to center the input and add margin */
@@ -84,34 +116,129 @@ body {
     color: white; ;
   }
 
+/* Main header carries same gradient as body */
+.main-header {
+  background: linear-gradient(135deg, rgba(0,100,230,0.18), rgba(0,163,196,0.12), rgba(232,243,255,0.45));
+  border-bottom: 1px solid rgba(15,58,115,0.1);
+  box-shadow: 0 12px 24px rgba(15,58,115,0.08);
+}
+
+.main-header .navbar {
+  background: transparent;
+  color: #0f3158;
+  border-bottom: none;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.main-header .navbar .nav-link,
+.main-header .navbar .navbar-nav > li > a,
+.main-header .navbar .brand-link {
+  color: #0f3158 !important;
+  font-weight: 600;
+  text-shadow: none;
+}
+
+.main-header .navbar .navbar-nav > li > a:hover {
+  color: #0b4b8a !important;
+}
+
+.brand-link {
+  background: transparent;
+  box-shadow: none;
+}
+
+.main-header .logo,
+.main-header .logo:hover {
+  background: transparent !important;
+  color: #0f3158 !important;
+  font-weight: 700;
+}
+
   /* custom_styles.css */
-  .sidebar-logo {
+.sidebar-logo {
     position: fixed;
     top: 0;
     left: 0;
     width: auto;
-    text-align: centre;
-    padding: 10px 0; /* Add padding to give some space around the logo */
-    background-color: #fff; /* Light background color to distinguish the logo area */
+    text-align: center;
+    padding: 12px 0;
     z-index: 1050;
 }
   
-  .sidebar-logo img {
-    height: 70px; /* Adjust the height of the logo as needed */
-    max-width: 100%; /* Ensure the logo scales within the container */
-    background-color: #ffffff; /* Optional: Add a background behind the logo */
-    border-radius: 8px; /* Optional: Add rounded corners for a modern look */
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for a more professional look */
-    padding: 10px; /* Optional: Add a slight shadow around the logo */
+.sidebar-logo img {
+  height: 100px; /* Slightly larger logo for better prominence */
+  max-width: 100%;
+    background: transparent;
+    padding: 0;
   }
 
 
-  /* Set the background color of the sidebar */
+  /* Gradient sidebar aligned with background waves */
 .main-sidebar {
-    background-color: #fff !important;  /* Apply the desired color */
-    box-shadow: none !important;
-    padding-top: 80px;
-  }
+  position: relative;
+  background: linear-gradient(155deg, rgba(3,73,178,0.94), rgba(1,142,193,0.9) 48%, rgba(232,243,255,0.94));
+  box-shadow: 10px 0 32px rgba(12,52,109,0.2);
+  padding-top: 92px;
+  border-right: 1px solid rgba(255,255,255,0.35);
+  overflow: hidden;
+}
+
+.main-sidebar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url('../images/kenbright-bg.svg') center/cover no-repeat;
+  opacity: 0.38;
+  pointer-events: none;
+}
+
+.main-sidebar .sidebar {
+  background: transparent;
+  padding: 0 18px 32px 18px;
+}
+
+.main-sidebar .nav-sidebar > .nav-item {
+  margin: 8px 0;
+}
+
+.main-sidebar .nav-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 1;
+  color: rgba(255,255,255,0.88) !important;
+  font-weight: 600;
+  letter-spacing: 0.15px;
+  border-radius: 0;
+  padding: 10px 16px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.18);
+  box-shadow: 0 10px 18px rgba(12,59,122,0.12);
+  transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+  backdrop-filter: blur(12px);
+}
+
+.main-sidebar .nav-link .nav-icon {
+  color: inherit;
+  opacity: 0.92;
+}
+
+.main-sidebar .nav-link.active,
+.main-sidebar .nav-link:hover {
+  background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(236,248,255,0.85)) !important;
+  color: #0f3158 !important;
+  box-shadow: 0 18px 30px rgba(14,70,142,0.2);
+  transform: translateY(-2px);
+}
+
+.main-sidebar .nav-link.active .nav-icon,
+.main-sidebar .nav-link:hover .nav-icon {
+  color: #0f3158;
+}
   
 /* Style container to remove list style and position correctly */
 .header-title-container {
@@ -123,7 +250,7 @@ body {
     width: 305px; /* Match the width of the sidebar-footer */
     text-align: left; /* Center the title text */
     padding: 5px 0; /* Add padding to give some space around the title */
-    background-color: #fff; /* Light background color to distinguish the title area */
+    background-color:   background: linear-gradient(145deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.4) 40%, rgba(255,255,255,0.15) 100%);
     border-radius: 8px; /* Optional: Add rounded corners for a modern look */
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for a more professional look */
 
@@ -133,7 +260,7 @@ body {
 .header-title {
     font-size: 16px;
     font-weight: bold;
-    color: #0137A6;
+    color: #000;
     padding-left: 5px; /* Space after the vertical line */
 }
 
@@ -153,16 +280,25 @@ body {
 
 /* Sidebar Items ----------------------------------------------------------------------------------*/
 .menu-container {
-    display: block; /* Align items to the start of the container */
-    position: fixed; /* Ensure the container is positioned correctly */    
-    top: 100px;  /* Aligns to the top of the viewport */
-    left: 0; 
-    width: 250px; /* Match the width of the sidebar-footer */
-    padding: 10px 5px; /* Add padding to give some space around the title */
-    background-color: #fff; /* Light background color to distinguish the title area */
-    border-radius: 8px; /* Optional: Add rounded corners for a modern look */
-    font-family: 'Mulish', sans-serif;
-    z-index: 1050;
+  display: block;
+  position: fixed;
+  top: 118px;
+  left: 0;
+  width: 230px;
+  padding: 16px 14px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.26);
+  border-radius: 18px;
+  font-family: 'Nunito Sans', sans-serif;
+  box-shadow: 0 16px 24px rgba(11,54,115,0.18);
+  backdrop-filter: blur(14px);
+  z-index: 1050;
+  overflow: hidden;
+}
+
+.main-sidebar .nav-sidebar {
+  padding: 0;
+  margin: 0;
 }
 
 
