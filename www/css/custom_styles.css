@@ -181,8 +181,7 @@ body::after {
   box-shadow: 10px 0 32px rgba(12,52,109,0.2);
   padding-top: 92px;
   border-right: 1px solid rgba(255,255,255,0.35);
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 .main-sidebar::before {
@@ -197,6 +196,32 @@ body::after {
 .main-sidebar .sidebar {
   background: transparent;
   padding: 0 18px 32px 18px;
+  height: calc(100vh - 92px);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar styling for sidebar */
+.main-sidebar .sidebar::-webkit-scrollbar,
+.menu-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.main-sidebar .sidebar::-webkit-scrollbar-track,
+.menu-container::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.1);
+  border-radius: 3px;
+}
+
+.main-sidebar .sidebar::-webkit-scrollbar-thumb,
+.menu-container::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.4);
+  border-radius: 3px;
+}
+
+.main-sidebar .sidebar::-webkit-scrollbar-thumb:hover,
+.menu-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.6);
 }
 
 .main-sidebar .nav-sidebar > .nav-item {
@@ -287,6 +312,7 @@ body::after {
   top: 118px;
   left: 0;
   width: 230px;
+  max-height: calc(100vh - 130px);
   padding: 16px 14px;
   background: rgba(255,255,255,0.12);
   border: 1px solid rgba(255,255,255,0.26);
@@ -295,7 +321,8 @@ body::after {
   box-shadow: 0 16px 24px rgba(11,54,115,0.18);
   backdrop-filter: blur(14px);
   z-index: 1050;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .main-sidebar .nav-sidebar {
