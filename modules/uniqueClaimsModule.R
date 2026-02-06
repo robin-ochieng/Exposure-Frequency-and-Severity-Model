@@ -84,17 +84,12 @@ uniqueClaimsResultsServer <- function(id, processedClaimsData) {
       paste("unique-claims-summary-", Sys.Date(), ".csv", sep="")
     },
     content = function(file) {
-      req(Unique_Results())
-      results <- Unique_Results()
-      # Ensure results are formatted before writing to CSV
-      results[] <- lapply(results, function(x) {
-        if(is.numeric(x)) {
-          as.character(scales::comma(x, accuracy = 0.01))
-        } else {
-          x
-        }
-      })
-      write.csv(results, file, row.names = FALSE)
+      data <- tryCatch(Unique_Results(), error = function(e) NULL)
+      if (is.null(data)) {
+        showNotification("Please calculate Unique Claims first before downloading.", type = "warning")
+        return(NULL)
+      }
+      write.csv(data, file, row.names = FALSE)
     }
   )
 

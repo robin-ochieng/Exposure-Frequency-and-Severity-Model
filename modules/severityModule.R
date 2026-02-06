@@ -76,17 +76,12 @@ severityServer <- function(id, Unique_Results, Gross_Reported_Claims) {
       paste("claim-severities-", Sys.Date(), ".csv", sep="")
     },
     content = function(file) {
-      req(Severity_Results())
-      results <- Severity_Results()
-      # Convert numeric results to string with two decimal places for the CSV
-      results[] <- lapply(results, function(x) {
-        if(is.numeric(x)) {
-          as.character(scales::comma(x, accuracy = 0.1))
-        } else {
-          x
-        }
-      })
-      write.csv(results, file, row.names = FALSE)
+      data <- tryCatch(Severity_Results(), error = function(e) NULL)
+      if (is.null(data)) {
+        showNotification("Please calculate Claim Severities first before downloading.", type = "warning")
+        return(NULL)
+      }
+      write.csv(data, file, row.names = FALSE)
     }
   )
 

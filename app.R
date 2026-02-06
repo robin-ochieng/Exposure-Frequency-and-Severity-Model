@@ -25,6 +25,8 @@ source("modules/premiumDataModule.R", local = TRUE)[1]
 source("modules/exposureResultsModule.R", local = TRUE)
 source("modules/grossReportedClaimsModule.R", local = TRUE)
 source("modules/uniqueClaimsModule.R", local = TRUE)
+source("modules/uniquePremiumsModule.R", local = TRUE)
+source("modules/activePoliciesModule.R", local = TRUE)
 source("modules/claimFrequencyModule.R", local = TRUE)
 source("modules/claimFrequencyVarianceModule.R", local = TRUE)
 source("modules/severityModule.R", local = TRUE)
@@ -78,6 +80,8 @@ ui <- bs4DashPage(
       bs4SidebarMenuItem("Exposure Results", tabName = "viewExposureResults", icon = icon("chart-area")),
       bs4SidebarMenuItem("Gross Reported Claims", tabName = "viewGrossReportedClaims", icon = icon("chart-bar")),
       bs4SidebarMenuItem("Unique Claims ", tabName = "viewUniqueClaimsSummary", icon = icon("clipboard-check")),
+      bs4SidebarMenuItem("Unique Premiums", tabName = "viewUniquePremiumsSummary", icon = icon("file-invoice")),
+      bs4SidebarMenuItem("Active Policies", tabName = "viewActivePolicies", icon = icon("shield-alt")),
       bs4SidebarMenuItem("Claim Frequencies", tabName = "viewClaimFrequencies", icon = icon("chart-pie")),
       bs4SidebarMenuItem("Claim Severities", tabName = "viewClaimSeverities", icon = icon("exclamation-triangle")),
       bs4SidebarMenuItem("Risk Premium", tabName = "viewRiskPremium", icon = icon("coins")),
@@ -116,6 +120,14 @@ ui <- bs4DashPage(
         tabName = "viewUniqueClaimsSummary",
         uniqueClaimsResultsUI("uniqueClaimsModule")
       ),
+      bs4TabItem(
+        tabName = "viewUniquePremiumsSummary",
+        uniquePremiumsResultsUI("uniquePremiumsModule")
+      ),
+      bs4TabItem(
+        tabName = "viewActivePolicies",
+        activePoliciesUI("activePoliciesModule")
+      ),
       bs4TabItem(tabName = "viewClaimFrequencies",
                  fluidRow(claimsFrequencyUI("claimsFrequency")),
                  fluidRow(claimsFrequencyVarianceUI("claimsFrequencyVariance"))
@@ -153,6 +165,10 @@ server <- function(input, output, session) {
   Gross_Reported_Claims <- grossReportedClaimsServer("grossReportedClaims", processedClaimsData)
 
   Unique_Results <- uniqueClaimsResultsServer("uniqueClaimsModule", processedClaimsData)
+
+  Unique_Premium_Results <- uniquePremiumsResultsServer("uniquePremiumsModule", processedData)
+
+  Active_Policies <- activePoliciesServer("activePoliciesModule", processedData)
 
   Frequency_Results <- claimsFrequencyServer("claimsFrequency", Unique_Results, Exposure_Results$Exposure_Results)
 

@@ -83,9 +83,13 @@ severityVarianceServer <- function(id, Severity_Results) {
       paste("claim-severities-Variance-", Sys.Date(), ".csv", sep="")
     },
     content = function(file) {
-      req(Percentage_Change_Severity())
-      results <- Percentage_Change_Severity()
-      # Convert numeric results to string with two decimal places for the CSV
+      data <- tryCatch(Percentage_Change_Severity(), error = function(e) NULL)
+      if (is.null(data)) {
+        showNotification("Please calculate Severity Variance first before downloading.", type = "warning")
+        return(NULL)
+      }
+      results <- data
+      # Convert numeric results to percentage format for the CSV
       results[] <- lapply(results, function(x) {
         if(is.numeric(x)) {
           sprintf("%.2f%%", x)

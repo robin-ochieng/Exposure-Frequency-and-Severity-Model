@@ -79,8 +79,12 @@ grossReportedClaimsServer <- function(id, processedClaimsData) {
       paste("gross-reported-claims-", Sys.Date(), ".csv", sep="")
     },
     content = function(file) {
-      req(Gross_Reported_Claims())
-      write.csv(Gross_Reported_Claims(), file, row.names = FALSE)
+      data <- tryCatch(Gross_Reported_Claims(), error = function(e) NULL)
+      if (is.null(data)) {
+        showNotification("Please calculate Gross Reported Claims first before downloading.", type = "warning")
+        return(NULL)
+      }
+      write.csv(data, file, row.names = FALSE)
     }
   )
 

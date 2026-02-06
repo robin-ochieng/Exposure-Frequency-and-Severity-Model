@@ -81,8 +81,12 @@ claimsFrequencyServer <- function(id, Unique_Results, Exposure_Results) {
       paste("claim-frequencies-", Sys.Date(), ".csv", sep="")
     },
     content = function(file) {
-      req(Frequency_Results())
-      results <- Frequency_Results()
+      data <- tryCatch(Frequency_Results(), error = function(e) NULL)
+      if (is.null(data)) {
+        showNotification("Please calculate Claim Frequencies first before downloading.", type = "warning")
+        return(NULL)
+      }
+      results <- data
       # Convert numeric results to percentage format for the CSV
       results[] <- lapply(results, function(x) {
         if(is.numeric(x)) {

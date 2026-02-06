@@ -94,16 +94,12 @@ riskPremiumServer <- function(id, Unique_Results, Frequency_Results, Severity_Re
       paste("risk-premium-", Sys.Date(), ".csv", sep="")
     },
     content = function(file) {
-      req(Risk_Premium())
-      results <- Risk_Premium()
-      results[] <- lapply(results, function(x) {
-        if(is.numeric(x)) {
-          as.character(scales::comma(x))
-        } else {
-          x
-        }
-      })
-      write.csv(results, file, row.names = FALSE)
+      data <- tryCatch(Risk_Premium(), error = function(e) NULL)
+      if (is.null(data)) {
+        showNotification("Please calculate Risk Premium first before downloading.", type = "warning")
+        return(NULL)
+      }
+      write.csv(data, file, row.names = FALSE)
     }
   ) 
 

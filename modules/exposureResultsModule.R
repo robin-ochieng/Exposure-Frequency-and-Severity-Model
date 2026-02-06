@@ -132,10 +132,12 @@ exposureResultsServer <- function(id, processedPremiumData) {
       paste("Exposure-Results-", Sys.Date(), ".csv", sep = "")
     },
     content = function(file) {
-      req(Exposure_Results())
-      results <- Exposure_Results()
-      # Write the results to a CSV file
-      write.csv(results, file, row.names = FALSE)
+      data <- tryCatch(Exposure_Results(), error = function(e) NULL)
+      if (is.null(data)) {
+        showNotification("Please calculate Exposure Results first before downloading.", type = "warning")
+        return(NULL)
+      }
+      write.csv(data, file, row.names = FALSE)
     }
   )
 

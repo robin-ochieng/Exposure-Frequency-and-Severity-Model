@@ -78,16 +78,12 @@ officePremiumServer <- function(id, Risk_Premium, yearStart, yearEnd) {
       paste("office-premium-", Sys.Date(), ".csv", sep="")
     },
     content = function(file) {
-      req(Office_Premium())
-      results <- Office_Premium()
-      results[] <- lapply(results, function(x) {
-        if (is.numeric(x)) {
-          as.character(scales::comma(x, accuracy = 0.01))
-        } else {
-          x
-        }
-      })
-      write.csv(results, file, row.names = FALSE)
+      data <- tryCatch(Office_Premium(), error = function(e) NULL)
+      if (is.null(data)) {
+        showNotification("Please calculate Office Premium first before downloading.", type = "warning")
+        return(NULL)
+      }
+      write.csv(data, file, row.names = FALSE)
     }
   )
 

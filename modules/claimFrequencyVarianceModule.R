@@ -99,8 +99,12 @@ claimsFrequencyVarianceServer <- function(id, Frequency_Results) {
       paste("claim-frequencies-Variance-", Sys.Date(), ".csv", sep="")
     },
     content = function(file) {
-      req(Percentage_Change_Results())
-      results <- Percentage_Change_Results()
+      data <- tryCatch(Percentage_Change_Results(), error = function(e) NULL)
+      if (is.null(data)) {
+        showNotification("Please calculate Claim Frequencies Variance first before downloading.", type = "warning")
+        return(NULL)
+      }
+      results <- data
       # Convert numeric results to percentage format for the CSV
       results[] <- lapply(results, function(x) {
         if(is.numeric(x)) {
