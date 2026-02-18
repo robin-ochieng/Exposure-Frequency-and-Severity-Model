@@ -26,7 +26,8 @@ premiumDataInputUI <- function(id) {
       tags$li(class = "custom-list-item", icon("calendar-day"), " ", tags$b("Period_Upto: -"), " The Policy End Date"),
       tags$li(class = "custom-list-item", icon("file-alt"), " ", tags$b("PolicyNo: -"), " The Policy Number"),
       tags$li(class = "custom-list-item", icon("sitemap"), " ", tags$b("Statutory_Class: -"), " The Statutory Class of Business"),
-      tags$li(class = "custom-list-item", icon("dollar-sign"), " ", tags$b("Gross_Premium: -"), " The Gross Premium Amount")
+      tags$li(class = "custom-list-item", icon("dollar-sign"), " ", tags$b("Gross_Premium: -"), " The Gross Premium Amount"),
+      tags$li(class = "custom-list-item", icon("calendar-check"), " ", tags$b("Auth_Date: -"), " The Authorization Date")
      )
     )
    ),
@@ -62,7 +63,9 @@ processedPremiumData <- eventReactive(input$file1, {
         mutate(
           `Period_From` = lubridate::parse_date_time(`Period_From`, orders = c("dmy", "ymd", "mdy")),
           `Period_Upto` = lubridate::parse_date_time(`Period_Upto`, orders = c("dmy", "ymd", "mdy")),
-          Policy_ID = paste(PolicyNo, Period_From, Period_Upto)
+          `Auth_Date` = lubridate::parse_date_time(`Auth_Date`, orders = c("dmy", "ymd", "mdy")),
+          Auth_Year = lubridate::year(`Auth_Date`),
+          Policy_ID = paste(PolicyNo, Auth_Year)
         ) %>%
         group_by(Policy_ID) %>%
         mutate(Unique = ifelse(row_number() == 1, 1, 0)) %>%
@@ -73,7 +76,9 @@ processedPremiumData <- eventReactive(input$file1, {
         mutate(
           `Period_From` = lubridate::parse_date_time(`Period_From`, orders = c("dmy", "ymd", "mdy")),
           `Period_Upto` = lubridate::parse_date_time(`Period_Upto`, orders = c("dmy", "ymd", "mdy")),
-          Policy_ID = paste(PolicyNo, Period_From, Period_Upto)
+          `Auth_Date` = lubridate::parse_date_time(`Auth_Date`, orders = c("dmy", "ymd", "mdy")),
+          Auth_Year = lubridate::year(`Auth_Date`),
+          Policy_ID = paste(PolicyNo, Auth_Year)
         ) %>%
         group_by(Policy_ID) %>%
         mutate(Unique = ifelse(row_number() == 1, 1, 0)) %>%
