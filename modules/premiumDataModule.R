@@ -65,7 +65,7 @@ processedPremiumData <- eventReactive(input$file1, {
           `Period_Upto` = lubridate::parse_date_time(`Period_Upto`, orders = c("dmy", "ymd", "mdy")),
           `Auth_Date` = lubridate::parse_date_time(`Auth_Date`, orders = c("dmy", "ymd", "mdy")),
           Auth_Year = lubridate::year(`Auth_Date`),
-          Policy_ID = paste(PolicyNo, Auth_Year)
+          Policy_ID = paste(PolicyNo, Period_From, Period_Upto)
         ) %>%
         group_by(Policy_ID) %>%
         mutate(Unique = ifelse(row_number() == 1, 1, 0)) %>%
@@ -78,7 +78,7 @@ processedPremiumData <- eventReactive(input$file1, {
           `Period_Upto` = lubridate::parse_date_time(`Period_Upto`, orders = c("dmy", "ymd", "mdy")),
           `Auth_Date` = lubridate::parse_date_time(`Auth_Date`, orders = c("dmy", "ymd", "mdy")),
           Auth_Year = lubridate::year(`Auth_Date`),
-          Policy_ID = paste(PolicyNo, Auth_Year)
+          Policy_ID = paste(PolicyNo, Period_From, Period_Upto)
         ) %>%
         group_by(Policy_ID) %>%
         mutate(Unique = ifelse(row_number() == 1, 1, 0)) %>%
