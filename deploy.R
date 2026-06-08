@@ -8,6 +8,21 @@ if (!requireNamespace("rsconnect", quietly = TRUE)) {
 
 library(rsconnect)
 
+app_files <- c(
+  ".Rprofile",
+  "app.R",
+  list.files("modules", pattern = "\\.R$", recursive = TRUE, full.names = TRUE),
+  list.files("www", recursive = TRUE, full.names = TRUE)
+)
+
+# Keep the Git deployment manifest in sync with the source being published.
+rsconnect::writeManifest(
+  appDir = getwd(),
+  appFiles = app_files,
+  appPrimaryDoc = "app.R",
+  appMode = "shiny"
+)
+
 # Set your Posit Connect Cloud account info
 # You'll need to get your API key from: https://connect.posit.cloud/connect/#/apps
 # Then run: rsconnect::setAccountInfo(name="your-account-name", 
@@ -17,6 +32,8 @@ library(rsconnect)
 # Deploy the application
 rsconnect::deployApp(
   appDir = getwd(),
+  appFiles = app_files,
+  appPrimaryDoc = "app.R",
   appName = "exposure-frequency-severity-model",
   appTitle = "Exposure Frequency and Severity Model",
   forceUpdate = TRUE,

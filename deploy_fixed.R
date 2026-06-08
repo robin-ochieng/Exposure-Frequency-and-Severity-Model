@@ -16,7 +16,7 @@ required_packages <- c(
   "shiny", "dplyr", "tidyr", "ggplot2", "readr", 
   "purrr", "tibble", "stringr", "forcats", "lubridate",
   "readxl", "scales", "plotly", "ggrepel", 
-  "bs4Dash", "bslib", "DT"
+  "bs4Dash", "bslib", "DT", "writexl"
 )
 
 for (pkg in required_packages) {
@@ -35,26 +35,24 @@ cat("   rsconnect::setAccountInfo(name, token, secret)\n\n")
 # Deploy with explicit file list to avoid issues
 cat("3. Deploying to Posit Connect Cloud...\n\n")
 
+app_files <- c(
+  ".Rprofile",
+  "app.R",
+  list.files("modules", pattern = "\\.R$", recursive = TRUE, full.names = TRUE),
+  list.files("www", recursive = TRUE, full.names = TRUE)
+)
+
+rsconnect::writeManifest(
+  appDir = getwd(),
+  appFiles = app_files,
+  appPrimaryDoc = "app.R",
+  appMode = "shiny"
+)
+
 rsconnect::deployApp(
   appDir = getwd(),
-  appFiles = c(
-    "app.R",
-    "modules/claimsDataModule.R",
-    "modules/premiumDataModule.R",
-    "modules/exposureResultsModule.R",
-    "modules/grossReportedClaimsModule.R",
-    "modules/uniqueClaimsModule.R",
-    "modules/claimFrequencyModule.R",
-    "modules/claimFrequencyVarianceModule.R",
-    "modules/severityModule.R",
-    "modules/severityVarianceModule.R",
-    "modules/riskPremiumModule.R",
-    "modules/officePremiumModule.R",
-    "modules/frequencyvsSeverityModule.R",
-    "www/css/custom_styles.css",
-    "www/images",
-    "www/favicon"
-  ),
+  appFiles = app_files,
+  appPrimaryDoc = "app.R",
   appName = "exposure-frequency-severity-model",
   appTitle = "Exposure Frequency and Severity Model",
   forceUpdate = TRUE,

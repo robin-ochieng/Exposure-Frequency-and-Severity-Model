@@ -48,7 +48,8 @@ required_pkgs <- c(
   "ggrepel",    # Label repelling for ggplot2
   "bs4Dash",    # Bootstrap 4 dashboard
   "bslib",      # Bootstrap themes
-  "DT"          # DataTables
+  "DT",         # DataTables
+  "writexl"     # Excel file downloads
 )
 
 cat("Step 2: Checking installed packages...\n")
@@ -97,16 +98,19 @@ cat("   ✓ rsconnect loaded\n")
 cat("\nStep 5: Generating manifest.json...\n")
 cat("   This will scan app.R and detect all dependencies...\n")
 
-# Remove old manifest if it exists
-if (file.exists("manifest.json")) {
-  cat("   Removing old manifest.json...\n")
-  file.remove("manifest.json")
-}
+# Include only files required by the running application.
+app_files <- c(
+  ".Rprofile",
+  "app.R",
+  list.files("modules", pattern = "\\.R$", recursive = TRUE, full.names = TRUE),
+  list.files("www", recursive = TRUE, full.names = TRUE)
+)
 
 # Generate manifest using rsconnect
 tryCatch({
   rsconnect::writeManifest(
     appDir = getwd(),
+    appFiles = app_files,
     appPrimaryDoc = "app.R",
     appMode = "shiny"
   )
@@ -130,12 +134,13 @@ manifest <- jsonlite::fromJSON("manifest.json", simplifyVector = FALSE)
 
 cat("   ✓ Manifest is valid JSON\n")
 cat("   ✓ App mode:", manifest$metadata$appmode, "\n")
-cat("   ✓ Primary doc:", manifest$metadata$entrypoint, "\n")
-cat("   ✓ R version:", manifest$packages$R$version, "\n")
+cat("   ✓ R version:", manifest$platform, "\n")
 
 # Count packages in manifest
-pkg_count <- length(manifest$packages) - 1  # Subtract 1 for R itself
+pkg_count <- length(manifest$packages)
 cat("   ✓ Packages listed:", pkg_count, "\n")
+
+source("test_deployment_manifest.R", local = TRUE)
 
 cat("\n========================================================================\n")
 cat("  SUCCESS! manifest.json has been generated\n")

@@ -9,7 +9,7 @@ packages_to_test <- c(
   "shiny", "dplyr", "tidyr", "ggplot2", "readr", 
   "purrr", "tibble", "stringr", "forcats", "lubridate",
   "readxl", "scales", "plotly", "ggrepel", 
-  "bs4Dash", "bslib", "DT"
+  "bs4Dash", "bslib", "DT", "writexl"
 )
 
 all_loaded <- TRUE

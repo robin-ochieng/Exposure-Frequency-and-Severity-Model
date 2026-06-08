@@ -28,7 +28,7 @@ cat("2. Verifying packages are installed...\n")
 required_pkgs <- c("shiny", "dplyr", "tidyr", "ggplot2", "readr", 
                    "purrr", "tibble", "stringr", "forcats", "lubridate",
                    "readxl", "scales", "plotly", "ggrepel", 
-                   "bs4Dash", "bslib", "DT")
+                   "bs4Dash", "bslib", "DT", "writexl")
 
 missing <- c()
 for (pkg in required_pkgs) {
@@ -55,9 +55,24 @@ if (dir.exists("rsconnect")) {
   unlink("rsconnect", recursive = TRUE)
 }
 
-# Deploy - rsconnect will scan app.R and detect dependencies automatically
+# Deploy - rsconnect will scan the application files and detect dependencies
+app_files <- c(
+  ".Rprofile",
+  "app.R",
+  list.files("modules", pattern = "\\.R$", recursive = TRUE, full.names = TRUE),
+  list.files("www", recursive = TRUE, full.names = TRUE)
+)
+
+rsconnect::writeManifest(
+  appDir = getwd(),
+  appFiles = app_files,
+  appPrimaryDoc = "app.R",
+  appMode = "shiny"
+)
+
 rsconnect::deployApp(
   appDir = getwd(),
+  appFiles = app_files,
   appPrimaryDoc = "app.R",
   appName = "exposure-frequency-severity-model",
   appTitle = "Exposure Frequency and Severity Model",

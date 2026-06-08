@@ -14,8 +14,11 @@ if (requireNamespace("rsconnect", quietly = TRUE)) {
 }
 
 cat("\n2. Checking required packages...\n")
-required_packages <- c("shiny", "tidyverse", "readxl", "scales", 
-                       "plotly", "ggrepel", "bs4Dash", "bslib", "DT")
+required_packages <- c(
+  "shiny", "dplyr", "tidyr", "ggplot2", "readr", "purrr", "tibble",
+  "stringr", "forcats", "lubridate", "readxl", "scales", "plotly",
+  "ggrepel", "bs4Dash", "bslib", "DT", "writexl"
+)
 
 missing_packages <- c()
 for (pkg in required_packages) {
