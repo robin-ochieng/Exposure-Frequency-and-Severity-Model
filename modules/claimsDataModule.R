@@ -37,6 +37,11 @@ claimsDataInputUI <- function(id) {
         status = "white",
         solidHeader = TRUE,
         width = 12,
+        fluidRow(
+          column(6, downloadButton(ns("downloadClaimsCSV"),   "Download CSV",   class = "btn btn-primary btn-primary-custom")),
+          column(6, downloadButton(ns("downloadClaimsExcel"), "Download Excel", class = "btn btn-primary btn-primary-custom"))
+        ),
+        br(),
         DTOutput(ns("viewClaimsData"))  # Include DTOutput within the card
       )
     )
@@ -107,6 +112,30 @@ processedClaimsData <- eventReactive(input$file2, {
                                                       "}"
                                                     )))
   })
+
+  output$downloadClaimsCSV <- downloadHandler(
+    filename = function() paste0("claims-data-", Sys.Date(), ".csv"),
+    content = function(file) {
+      data <- tryCatch(processedClaimsData(), error = function(e) NULL)
+      if (is.null(data)) {
+        showNotification("Please upload claims data first before downloading.", type = "warning")
+        return(NULL)
+      }
+      write.csv(data, file, row.names = FALSE)
+    }
+  )
+
+  output$downloadClaimsExcel <- downloadHandler(
+    filename = function() paste0("claims-data-", Sys.Date(), ".xlsx"),
+    content = function(file) {
+      data <- tryCatch(processedClaimsData(), error = function(e) NULL)
+      if (is.null(data)) {
+        showNotification("Please upload claims data first before downloading.", type = "warning")
+        return(NULL)
+      }
+      writexl::write_xlsx(data, file)
+    }
+  )
 
   return(reactive({ processedClaimsData() }))
 }

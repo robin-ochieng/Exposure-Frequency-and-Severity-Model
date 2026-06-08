@@ -34,9 +34,14 @@ premiumDataInputUI <- function(id) {
    hr(),
    bs4Card(
       title = "Premium Data Overview",
-      status = "white", 
+      status = "white",
       solidHeader = TRUE,
       width = 12,
+      fluidRow(
+        column(6, downloadButton(ns("downloadPremiumCSV"),   "Download CSV",   class = "btn btn-primary btn-primary-custom")),
+        column(6, downloadButton(ns("downloadPremiumExcel"), "Download Excel", class = "btn btn-primary btn-primary-custom"))
+      ),
+      br(),
       DTOutput(ns("viewPremiumData"))
      )
     )  
@@ -110,6 +115,30 @@ processedPremiumData <- eventReactive(input$file1, {
                                                      )))
   })
 
+  output$downloadPremiumCSV <- downloadHandler(
+    filename = function() paste0("premium-data-", Sys.Date(), ".csv"),
+    content = function(file) {
+      data <- tryCatch(processedPremiumData(), error = function(e) NULL)
+      if (is.null(data)) {
+        showNotification("Please upload premium data first before downloading.", type = "warning")
+        return(NULL)
+      }
+      write.csv(data, file, row.names = FALSE)
+    }
+  )
+
+  output$downloadPremiumExcel <- downloadHandler(
+    filename = function() paste0("premium-data-", Sys.Date(), ".xlsx"),
+    content = function(file) {
+      data <- tryCatch(processedPremiumData(), error = function(e) NULL)
+      if (is.null(data)) {
+        showNotification("Please upload premium data first before downloading.", type = "warning")
+        return(NULL)
+      }
+      writexl::write_xlsx(data, file)
+    }
+  )
+
   return(reactive({ processedPremiumData() }))
-  
+
 }

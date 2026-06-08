@@ -15,6 +15,7 @@ library(ggrepel)
 library(bs4Dash)
 library(bslib)
 library(DT)
+library(writexl)
 
 # Increase max file size to 100 MB
 options(shiny.maxRequestSize = 2000 * 1024^2)
